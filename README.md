@@ -21,13 +21,13 @@ Customers are stored in a CSV file (customers.csv), which has the following form
 # Solution
 The solution is developed in Python 3.9
 * `send_email_cli.py` is a CLI application that solves above problem
-* `send_email_web.py` is a bonus flask based web UI that can send emails. Use in conjunction with Docker Compose to get flask email output to mailhog container.
+* `send_email_web.py` is a bonus flask based web UI that can send emails. Use in conjunction with Docker Compose to get flask email output to Mailhog container.
 
 Note: MailHog is an email testing tool for developers
 
 # Requirements
 * Unix environment with Python 3.9 (mainly because I'm testing a new 3.9 feature to perform union on dict in `email_marketing.py:68`)
-* Docker and Docker-compose (for using the flask web UI and mailhog feature)
+* Docker and Docker-compose (for using the Flask web UI and Mailhog feature)
 
 # Assumptions
 * Email template and customers file *IS* case sensitive
@@ -71,7 +71,10 @@ On a web browser:
 * verify the emails are correctly sent
 
 
+# Screenshots
+
+## Flask Screenshot
 ![Screenshot](screenshot1.png)
 
-
+## Mailhog Screenshot
 ![Screenshot](screenshot2.png)
