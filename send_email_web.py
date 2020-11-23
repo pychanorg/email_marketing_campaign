@@ -10,11 +10,10 @@ from email_marketing import preprocess_email_template, \
     process_email_template
 
 
-
 app = Flask(__name__)
 mail = Mail(app)
 
-app.config['MAIL_SERVER']='mailhog'
+app.config['MAIL_SERVER'] = 'mailhog'
 app.config['MAIL_PORT'] = 1025
 mail = Mail(app)
 
@@ -34,10 +33,12 @@ def send_email():
         customers_file_io = io.StringIO(customers_raw)
         customers_details = list(csv.DictReader(customers_file_io))
 
-        customer_emails, customers_errors = process_email_template(email_template_json, customers_details)
+        customer_emails, customers_errors = process_email_template(
+            email_template_json, customers_details)
 
         for customer_email in customer_emails:
-            msg = Message(customer_email['subject'], sender=customer_email['from'], recipients=[customer_email['to']])
+            msg = Message(customer_email['subject'], sender=customer_email['from'], recipients=[
+                          customer_email['to']])
             msg.body = customer_email['body']
             mail.send(msg)
 

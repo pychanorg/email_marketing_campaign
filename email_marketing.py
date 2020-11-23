@@ -57,7 +57,8 @@ def process_email_template(email_template, customers_details, extra_tags=None):
         extra_tags = get_extra_custom_tags()
 
     for customer in customers_details:
-        if 'EMAIL' not in customer or not customer['EMAIL']:
+        if 'EMAIL' not in customer or not customer['EMAIL'] or \
+                not customer['EMAIL'].strip():
             # handle email error
             customers_errors.append(customer)
         else:
