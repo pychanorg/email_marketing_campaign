@@ -6,3 +6,4 @@ freezegun
 # web
 jinja2
 flask
+Flask-Mail

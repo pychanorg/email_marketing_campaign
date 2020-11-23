@@ -1,0 +1,44 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Send Email to Mailhog MVP</title>
+</head>
+<body>
+
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+
+    <h1>Send Email to Mailhog MVP</h1>
+    <h2>Just a simple MVP tech demo. </h2>
+    <h2>No data validation or CSS styling included.</h2>
+    
+    <hr>
+
+    <form action="" method="post">
+        <p><label for="template">Email JSON Template</label></p>
+        <p><textarea rows="10" cols="100" name="template">
+{% raw %}
+{
+    "from": "The Marketing Team<marketing@example.com",
+    "subject": "{{FIRST_NAME}}, a new product is being launched soon...",
+    "mimeType": "text/plain",
+    "body": "Hi {{TITLE}} {{FIRST_NAME}} {{LAST_NAME}},\nToday, {{TODAY}}, we would like to tell you that... Sincerely,\nThe Marketing Team"
+}
+{% endraw %}
+        </textarea></p>
+        <p><label for="customers">Customers CSV</label></p>
+        <p><textarea rows="10" cols="100" name="customers">
+TITLE,FIRST_NAME,LAST_NAME,EMAIL
+Mr,John,Smith,john.smith@example.com
+Mrs,Michelle,Smith,michelle.smith@example.com
+        </textarea></p>
+        <p><input type="submit" value="Submit and send email to mailhog"></p>
+    </form>
+
+    <hr>
+
+    <h2>Mailhog link <a href="http://127.0.0.1:8025">http://127.0.0.1:8025</a></h2>
+
+</body>
+</html>
