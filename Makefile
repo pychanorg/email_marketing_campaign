@@ -14,3 +14,4 @@ cli_demo:
 test:
 	autopep8 -i *.py
 	flake8 *.py
+	python -m unittest

@@ -1,6 +1,7 @@
 # CI/CD
 flake8
 autopep8
+freezegun
 
 # web
 jinja2
