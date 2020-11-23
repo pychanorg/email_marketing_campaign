@@ -14,6 +14,15 @@ from email_marketing import preprocess_email_template, \
 
 def create_email_files(email_template_filename, customers_filename,
                        output_email_dir, errors_filename):
+    """
+    Generate and write email json files to output_email_dir
+
+    Output email filenames will be b format:
+        "output_email_dir/YYMMDD_HHMMSS_i.json"
+        (where i is the index number of the customer on the CSV file)
+
+    Output errors will be writtern in csv format
+    """
     with open(email_template_filename, 'r') as f:
         email_template = json.load(f)
     with open(customers_filename, 'r') as f:
@@ -30,6 +39,7 @@ def create_email_files(email_template_filename, customers_filename,
         ts = time.time()
         ts_str = datetime.fromtimestamp(ts).strftime('%Y%m%d_%H%M%S')
         for i, customer_email in enumerate(customer_emails):
+            # process each customer's custom email to a json file
             output_filename = '{}_{}.json'.format(ts_str, i)
             output_filepath = os.path.join(output_email_dir, output_filename)
             with open(output_filepath, 'w') as f:
@@ -46,6 +56,12 @@ def create_email_files(email_template_filename, customers_filename,
 
 
 def main():
+    """
+    CLI interface to send_email application
+
+    Try to read args from CLI, and
+    try to catch any errors from user supplied args
+    """
     usage = """Generate marketing emails to customers
 
 Example usage:
