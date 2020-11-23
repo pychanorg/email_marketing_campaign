@@ -1,0 +1,7 @@
+# CI/CD
+flake8
+autopep8
+
+# web
+jinja2
+flask
