@@ -2,6 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Send Email to Mailhog MVP</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mvp.css') }}">
 </head>
 <body>
 
@@ -11,9 +12,8 @@
 
     <h1>Send Email to Mailhog MVP</h1>
     <h2>Just a simple MVP tech demo. </h2>
-    <h2>No data validation or CSS styling included.</h2>
+    <h2>No security or data validation performed.</h2>
     
-    <hr>
 
     <form action="" method="post">
         <p><label for="template">Email JSON Template</label></p>
@@ -36,7 +36,6 @@ Mrs,Michelle,Smith,michelle.smith@example.com
         <p><input type="submit" value="Submit and send email to mailhog"></p>
     </form>
 
-    <hr>
 
     <h2>Mailhog link <a href="http://127.0.0.1:8025">http://127.0.0.1:8025</a></h2>
 
