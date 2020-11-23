@@ -41,12 +41,14 @@ Note: MailHog is an email testing tool for developers
 ```
 # setup python virtual env
 python3.9 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 ```
 
 # Usage
 For CLI application (Docker is not required)
 ```
-source venv/bin/python3
+source venv/bin/activate
 python send_email_cli.py input/email_template.json input/customers.csv output/ output/errors.csv
 
 # alternatively you can run the helper function in the makefile
