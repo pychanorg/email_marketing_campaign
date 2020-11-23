@@ -8,7 +8,6 @@ import csv
 
 
 from email_marketing import preprocess_email_template, \
-    preprocess_customers_details, \
     process_email_template
 
 
@@ -29,7 +28,6 @@ def create_email_files(email_template_filename, customers_filename,
         customers_details = list(csv.DictReader(f))
 
     email_template = preprocess_email_template(email_template)
-    customers_details = preprocess_customers_details(customers_details)
 
     customer_emails, customers_errors = process_email_template(
         email_template, customers_details)

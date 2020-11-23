@@ -16,20 +16,22 @@ def preprocess_email_template(email_template):
     return email_template
 
 
-def preprocess_customers_details(customers_details):
+def get_extra_custom_tags(tags=None):
     """
-    Preprocess customer details tags by injecting "TODAY" tag
+    Add extra tags by injecting "TODAY" tag
 
     {{TODAY}} tag is in "31 Dec 2020" format
 
     Args:
-        customers_details (list): list of customers details from csv file
+        tags (list): optional list of existing tags
     """
+    if tags is None:
+        tags = {}
     ts = time.time()
     ts_str = datetime.fromtimestamp(ts).strftime('%d %b %Y')
-    for customer_detail in customers_details:
-        customer_detail['TODAY'] = ts_str
-    return customers_details
+    tags['TODAY'] = ts_str
+
+    return tags
 
 
 def apply_tags(jinja_text, jinja_tags):
@@ -40,7 +42,7 @@ def apply_tags(jinja_text, jinja_tags):
     return template.render(jinja_tags)
 
 
-def process_email_template(email_template, customers_details):
+def process_email_template(email_template, customers_details, extra_tags=None):
     """
     Apply customer tags from CSV to email template
 
@@ -51,16 +53,26 @@ def process_email_template(email_template, customers_details):
     customer_emails = []
     customers_errors = []
 
+    if extra_tags is None:
+        extra_tags = get_extra_custom_tags()
+
     for customer in customers_details:
         if 'EMAIL' not in customer or not customer['EMAIL']:
             # handle email error
             customers_errors.append(customer)
         else:
+
+            # add any custom tags such as {{TODAY}} tags
+            # NOTE: new 3.9 feature to perform union on dict
+            customer = customer | extra_tags
+
             curr_template = email_template.copy()
-            curr_template['to'] = apply_tags(curr_template['to'], customer)
+            curr_template['to'] = apply_tags(
+                curr_template.get('to', ""), customer)
             curr_template['subject'] = apply_tags(
-                curr_template['subject'], customer)
-            curr_template['body'] = apply_tags(curr_template['body'], customer)
+                curr_template.get('subject', ""), customer)
+            curr_template['body'] = apply_tags(
+                curr_template.get('body', ""), customer)
             customer_emails.append(curr_template)
 
     return customer_emails, customers_errors
